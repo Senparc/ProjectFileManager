@@ -20,7 +20,7 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <GroupBox Grid.Column="0" Header="Peoject Files" Margin="7,12,0,8" HorizontalAlignment="Left" Width="369">
-                <ListBox x:Name="lbFiles" VerticalContentAlignment="Center" SelectionChanged="lbFiles_SelectionChanged" SelectionMode="Single">
+                <ListBox x:Name="lbFiles" VerticalContentAlignment="Center" SelectionChanged="lbFiles_SelectionChanged" SelectionMode="Single" ItemsSource="{Binding BindFileData, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>

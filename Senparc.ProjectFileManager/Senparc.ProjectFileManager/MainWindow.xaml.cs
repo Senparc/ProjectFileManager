@@ -2,6 +2,7 @@
 using Senparc.ProjectFileManager.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -25,6 +26,7 @@ namespace Senparc.ProjectFileManager
     public partial class MainWindow : Window
     {
         public PropertyGroup SelectedFile { get; set; }
+        public ObservableCollection<KeyValuePair<string, string>> BindFileData { get; set; }
         private List<PropertyGroup> ProjectFiles { get; set; }
         private List<XDocument> ProjectDocuments { get; set; }
 
@@ -34,19 +36,25 @@ namespace Senparc.ProjectFileManager
             SenparcTrace.SendCustomLog("System", "Window opened.");
 
             Init();
+            //lbFiles.ItemsSource = BindFileData;
+
             //lblFilePath.DataContext = SelectedFile;
         }
 
-        private void Init() {
-            tabPropertyGroup.Visibility =  Visibility.Hidden;
+        private void Init()
+        {
+            tabPropertyGroup.Visibility = Visibility.Hidden;
+            BindFileData = new ObservableCollection<KeyValuePair<string, string>>();
             ProjectFiles = new List<PropertyGroup>();
             ProjectDocuments = new List<XDocument>();
-            SelectedFile = new PropertyGroup() { FullFilePath = "[ no file selectd ]" };
+            SelectedFile = new PropertyGroup() { FullFilePath = $"[ no file selectd ] - {SystemTime.Now}" };
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-                  var path = txtPath.Text?.Trim();
+            Init();
+
+            var path = txtPath.Text?.Trim();
             if (string.IsNullOrEmpty(path) || !Directory.Exists(path))
             {
                 MessageBox.Show("Please input the correct path which includes .csproj files！", "error");
@@ -62,7 +70,7 @@ namespace Senparc.ProjectFileManager
                 {
                     var doc = XDocument.Load(file);
                     var propertyGroup = doc.Root.Elements("PropertyGroup").FirstOrDefault();
-                    if (propertyGroup==null)
+                    if (propertyGroup == null)
                     {
                         throw new Exception($"{file} is not a valid xml.csproj file.");
                     }
@@ -80,7 +88,7 @@ namespace Senparc.ProjectFileManager
                 }
             }
 
-            if (ProjectFiles.Count ==0)
+            if (ProjectFiles.Count == 0)
             {
                 MessageBox.Show("No valiable .csproj file！", "error");
                 return;
@@ -88,13 +96,11 @@ namespace Senparc.ProjectFileManager
 
             tabPropertyGroup.Visibility = Visibility.Visible;
 
-            Dictionary<string, string> lbFilesData = new Dictionary<string, string>();
             foreach (var projectFile in ProjectFiles)
             {
-                lbFilesData[projectFile.FileName] = projectFile.FullFilePath;
+                BindFileData.Add(new KeyValuePair<string, string>(projectFile.FileName, projectFile.FullFilePath));
             }
-
-            lbFiles.ItemsSource = lbFilesData;
+            //lbFiles.ItemsSource = BindFileData;
         }
 
         private void lbFiles_SelectionChanged(object sender, SelectionChangedEventArgs e)
