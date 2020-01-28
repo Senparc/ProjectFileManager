@@ -1,0 +1,60 @@
+﻿<Window x:Class="Senparc.ProjectFileManager.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Senparc.ProjectFileManager"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="583" Width="1014">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label Content="路径：" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center"/>
+        <TextBox x:Name="txtPath" HorizontalAlignment="Left" Margin="75,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="629" Text="E:\Senparc项目\WeiXinMPSDK.netcore\Samples"/>
+        <Button Content="搜索" HorizontalAlignment="Left" Margin="716,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="0.141,-0.36" Click="Button_Click"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="380"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <GroupBox Grid.Column="0" Header="Peoject Files" Margin="7,12,0,8" HorizontalAlignment="Left" Width="369">
+                <ListBox x:Name="lbFiles" VerticalContentAlignment="Center">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <!--<ColumnDefinition Width="300"></ColumnDefinition>-->
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Background="LightBlue" Content="{Binding Path=Key, Mode=OneWay}"></Label>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </GroupBox>
+            <Label Content="File Path:" Grid.Column="1" HorizontalAlignment="Left" Margin="4,5,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="lblFilePath" Content="{Binding SelectedFile.FullFilePath, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}" Grid.Column="1" HorizontalAlignment="Left" Margin="74,4,0,0" VerticalAlignment="Top" />
+            <Grid Grid.Column="1" Margin="0,40,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="120"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TabControl Grid.Column="0" x:Name="tabPropertyGroup">
+                    <TabItem Header="TargetFrameworks">
+                        
+                        <Grid Background="#FFE5E5E5">
+                            
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="TabItem">
+                        <Grid Background="#FFE5E5E5"/>
+                    </TabItem>
+                </TabControl>
+            </Grid>
+        </Grid>
+
+
+    </Grid>
+</Window>

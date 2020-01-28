@@ -50,3 +50,7 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+/.vs
+/Senparc.ProjectFileManager/.vs/Senparc.ProjectFileManager/v16
+/Senparc.ProjectFileManager/Senparc.ProjectFileManager/bin
+/Senparc.ProjectFileManager/Senparc.ProjectFileManager/obj
