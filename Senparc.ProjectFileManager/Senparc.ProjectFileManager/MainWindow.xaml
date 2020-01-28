@@ -20,7 +20,8 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <GroupBox Grid.Column="0" Header="Peoject Files" Margin="7,12,0,8" HorizontalAlignment="Left" Width="369">
-                <ListBox x:Name="lbFiles" VerticalContentAlignment="Center" SelectionChanged="lbFiles_SelectionChanged" SelectionMode="Single" ItemsSource="{Binding BindFileData, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}">
+                <ListBox x:Name="lbFiles" VerticalContentAlignment="Center" SelectionChanged="lbFiles_SelectionChanged" SelectionMode="Single" 
+                         ItemsSource="{Binding ProjectFiles,Mode=OneWay}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -28,14 +29,17 @@
                                     <!--<ColumnDefinition Width="300"></ColumnDefinition>-->
                                     <ColumnDefinition Width="*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" Background="LightBlue" Content="{Binding Path=Key, Mode=OneWay}"></Label>
+                                <Label Grid.Column="0" Background="LightBlue" Content="{Binding Path=FileName, Mode=TwoWay}"></Label>
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
             </GroupBox>
             <Label Content="File Path:" Grid.Column="1" HorizontalAlignment="Left" Margin="4,5,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="lblFilePath" Content="{Binding SelectedFile.FullFilePath, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}" Grid.Column="1" HorizontalAlignment="Left" Margin="74,4,0,0" VerticalAlignment="Top" DataContext="{Binding SelectedFile, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}" />
+            <Label x:Name="lblFilePath" 
+                   Content="{Binding FullFilePath, Mode=OneWay}" 
+                   Grid.Column="1" HorizontalAlignment="Left" Margin="74,4,0,0" VerticalAlignment="Top"
+                   />
             <Grid Grid.Column="1" Margin="0,40,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
@@ -43,7 +47,7 @@
                 </Grid.ColumnDefinitions>
                 <TabControl Grid.Column="0" x:Name="tabPropertyGroup">
                     <TabItem Header="TargetFrameworks">
-                        <TextBox x:Name="txtTargetFrameworks" MaxLines="1" VerticalAlignment="Top" FontSize="18"  Text="{Binding SelectedFile.TargetFrameworks, Mode=TwoWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}" />
+                        <TextBox x:Name="txtTargetFrameworks" MaxLines="1" VerticalAlignment="Top" FontSize="18"  Text="{Binding SelectedFile.TargetFrameworks, Mode=TwoWay}" />
                     </TabItem>
                     <TabItem Header="TabItem">
                         <Grid Background="#FFE5E5E5"/>

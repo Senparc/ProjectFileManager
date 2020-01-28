@@ -26,8 +26,8 @@ namespace Senparc.ProjectFileManager
     public partial class MainWindow : Window
     {
         public PropertyGroup SelectedFile { get; set; }
-        public ObservableCollection<KeyValuePair<string, string>> BindFileData { get; set; }
-        private List<PropertyGroup> ProjectFiles { get; set; }
+        //public ObservableCollection<KeyValuePair<string, string>> BindFileData { get; set; }
+        private ObservableCollection<PropertyGroup> ProjectFiles { get; set; }
         private List<XDocument> ProjectDocuments { get; set; }
 
         public MainWindow()
@@ -35,22 +35,20 @@ namespace Senparc.ProjectFileManager
             InitializeComponent();
             SenparcTrace.SendCustomLog("System", "Window opened.");
 
-            Init();
-            //lbFiles.ItemsSource = BindFileData;
+            lblFilePath.DataContext = SelectedFile;
+            lbFiles.DataContext = ProjectFiles;
+            lbFiles.ItemsSource = ProjectFiles;
 
-            //lblFilePath.DataContext = SelectedFile;
+            Init();
         }
 
         private void Init()
         {
             tabPropertyGroup.Visibility = Visibility.Hidden;
-            BindFileData = new ObservableCollection<KeyValuePair<string, string>>();
-            ProjectFiles = new List<PropertyGroup>();
+            //BindFileData = new ObservableCollection<KeyValuePair<string, string>>();
+            ProjectFiles =  new ObservableCollection<PropertyGroup>();
             ProjectDocuments = new List<XDocument>();
             SelectedFile = new PropertyGroup() { FullFilePath = $"[ no file selectd ] - {SystemTime.Now}" };
-
-            lblFilePath.DataContext = SelectedFile;
-            lbFiles.DataContext = BindFileData;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -67,7 +65,7 @@ namespace Senparc.ProjectFileManager
             SenparcTrace.SendCustomLog("Task", "Search .csproj files begin.");
 
             var csprojFiles = Directory.GetFiles(path, "*.csproj", SearchOption.AllDirectories);
-            if (csprojFiles==null || csprojFiles.Length == 0)
+            if (csprojFiles == null || csprojFiles.Length == 0)
             {
                 MessageBox.Show("No valiable .csproj file！", "error");
                 return;
@@ -105,17 +103,17 @@ namespace Senparc.ProjectFileManager
 
             tabPropertyGroup.Visibility = Visibility.Visible;
 
-            foreach (var projectFile in ProjectFiles)
-            {
-                BindFileData.Add(new KeyValuePair<string, string>(projectFile.FileName, projectFile.FullFilePath));
-            }
+            //foreach (var projectFile in ProjectFiles)
+            //{
+            //    BindFileData.Add(new KeyValuePair<string, string>(projectFile.FileName, projectFile.FullFilePath));
+            //}
             //lbFiles.ItemsSource = BindFileData;
         }
 
         private void lbFiles_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selectedData = (KeyValuePair<string, string>)e.AddedItems[0];
-            SelectedFile = ProjectFiles.First(z => z.FullFilePath == selectedData.Value);
+            var selectedData = (PropertyGroup)e.AddedItems[0];
+            SelectedFile = selectedData;
 
             //lblFilePath.DataContext = SelectedFile;
             //lblFilePath.Content = SelectedFile.FullFilePath;

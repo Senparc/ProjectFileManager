@@ -33,7 +33,7 @@ namespace Senparc.ProjectFileManager.Models
         #region Additional Information
         public XElement OriginalElement { get; set; }
 
-        public string FileName => Path.GetFileName(FullFilePath);
+        public string FileName { get; set; }
         public string FullFilePath { get; set; }
 
         #endregion
@@ -74,6 +74,7 @@ namespace Senparc.ProjectFileManager.Models
             }
             projectFile.OriginalElement = element;
             projectFile.FullFilePath = fullFilePath;
+            projectFile.FileName = Path.GetFileName(fullFilePath);
             return projectFile;
         }
     }
