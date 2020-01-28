@@ -25,19 +25,17 @@ namespace Senparc.ProjectFileManager
     /// </summary>
     public partial class MainWindow : Window
     {
-        public PropertyGroup SelectedFile { get; set; }
+        public PropertyGroup SelectedFile { get; set; } = new PropertyGroup() { FullFilePath = $"[ no file selectd ] - {SystemTime.Now}" };
         //public ObservableCollection<KeyValuePair<string, string>> BindFileData { get; set; }
-        private ObservableCollection<PropertyGroup> ProjectFiles { get; set; }
-        private List<XDocument> ProjectDocuments { get; set; }
+        public ObservableCollection<PropertyGroup> ProjectFiles { get; set; } = new ObservableCollection<PropertyGroup>();
+        public List<XDocument> ProjectDocuments { get; set; } = new List<XDocument>();
+
+        private bool _inited = false;
 
         public MainWindow()
         {
             InitializeComponent();
             SenparcTrace.SendCustomLog("System", "Window opened.");
-
-            lblFilePath.DataContext = SelectedFile;
-            lbFiles.DataContext = ProjectFiles;
-            lbFiles.ItemsSource = ProjectFiles;
 
             Init();
         }
@@ -46,9 +44,20 @@ namespace Senparc.ProjectFileManager
         {
             tabPropertyGroup.Visibility = Visibility.Hidden;
             //BindFileData = new ObservableCollection<KeyValuePair<string, string>>();
-            ProjectFiles =  new ObservableCollection<PropertyGroup>();
-            ProjectDocuments = new List<XDocument>();
-            SelectedFile = new PropertyGroup() { FullFilePath = $"[ no file selectd ] - {SystemTime.Now}" };
+            ProjectFiles.Clear();
+            ProjectDocuments.Clear();
+
+            lbFiles.ItemsSource = ProjectFiles;
+
+            if (!_inited)
+            {
+                lbFiles.DataContext = ProjectFiles;
+
+                _inited = true;
+            }
+
+            SelectedFile.FullFilePath = $"[ no file selectd ] - {SystemTime.Now}";
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -103,6 +112,9 @@ namespace Senparc.ProjectFileManager
 
             tabPropertyGroup.Visibility = Visibility.Visible;
 
+            //lbFiles.DataContext = ProjectFiles;
+            //lbFiles.ItemsSource = ProjectFiles;
+
             //foreach (var projectFile in ProjectFiles)
             //{
             //    BindFileData.Add(new KeyValuePair<string, string>(projectFile.FileName, projectFile.FullFilePath));
@@ -114,6 +126,10 @@ namespace Senparc.ProjectFileManager
         {
             var selectedData = (PropertyGroup)e.AddedItems[0];
             SelectedFile = selectedData;
+
+            lblFilePath.DataContext = SelectedFile;
+            txtTargetFrameworks.DataContext = SelectedFile;
+
 
             //lblFilePath.DataContext = SelectedFile;
             //lblFilePath.Content = SelectedFile.FullFilePath;
