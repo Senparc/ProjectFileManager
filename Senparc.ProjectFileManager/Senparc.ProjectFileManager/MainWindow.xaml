@@ -20,7 +20,7 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <GroupBox Grid.Column="0" Header="Peoject Files" Margin="7,12,0,8" HorizontalAlignment="Left" Width="369">
-                <ListBox x:Name="lbFiles" VerticalContentAlignment="Center">
+                <ListBox x:Name="lbFiles" VerticalContentAlignment="Center" SelectionChanged="lbFiles_SelectionChanged" SelectionMode="Single">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -43,10 +43,7 @@
                 </Grid.ColumnDefinitions>
                 <TabControl Grid.Column="0" x:Name="tabPropertyGroup">
                     <TabItem Header="TargetFrameworks">
-                        
-                        <Grid Background="#FFE5E5E5">
-                            
-                        </Grid>
+                        <TextBox x:Name="txtTargetFrameworks" MaxLines="1" VerticalAlignment="Top" FontSize="18"  Text="{Binding SelectedFile.TargetFrameworks, Mode=TwoWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}" />
                     </TabItem>
                     <TabItem Header="TabItem">
                         <Grid Background="#FFE5E5E5"/>

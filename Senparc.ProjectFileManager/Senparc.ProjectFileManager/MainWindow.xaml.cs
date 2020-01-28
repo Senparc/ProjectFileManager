@@ -24,24 +24,33 @@ namespace Senparc.ProjectFileManager
     /// </summary>
     public partial class MainWindow : Window
     {
-        public PropertyGroup SelectedFile { get; set; } = new PropertyGroup() { FullFilePath = "[ no file selectd ]" };
-        private List<PropertyGroup> ProjectFiles { get; set; } = new List<PropertyGroup>();
-        private List<XDocument> ProjectDocuments { get; set; } = new List<XDocument>(); 
+        public PropertyGroup SelectedFile { get; set; }
+        private List<PropertyGroup> ProjectFiles { get; set; }
+        private List<XDocument> ProjectDocuments { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
             SenparcTrace.SendCustomLog("System", "Window opened.");
 
+            Init();
             //lblFilePath.DataContext = SelectedFile;
+        }
+
+        private void Init() {
+            tabPropertyGroup.Visibility =  Visibility.Hidden;
+            ProjectFiles = new List<PropertyGroup>();
+            ProjectDocuments = new List<XDocument>();
+            SelectedFile = new PropertyGroup() { FullFilePath = "[ no file selectd ]" };
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var path = txtPath.Text?.Trim();
+                  var path = txtPath.Text?.Trim();
             if (string.IsNullOrEmpty(path) || !Directory.Exists(path))
             {
                 MessageBox.Show("Please input the correct path which includes .csproj files！", "error");
+                return;
             }
 
             SenparcTrace.SendCustomLog("Task", "Search .csproj files begin.");
@@ -71,6 +80,14 @@ namespace Senparc.ProjectFileManager
                 }
             }
 
+            if (ProjectFiles.Count ==0)
+            {
+                MessageBox.Show("No valiable .csproj file！", "error");
+                return;
+            }
+
+            tabPropertyGroup.Visibility = Visibility.Visible;
+
             Dictionary<string, string> lbFilesData = new Dictionary<string, string>();
             foreach (var projectFile in ProjectFiles)
             {
@@ -80,5 +97,10 @@ namespace Senparc.ProjectFileManager
             lbFiles.ItemsSource = lbFilesData;
         }
 
+        private void lbFiles_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedData = (KeyValuePair<string, string>)e.AddedItems[0];
+            SelectedFile = ProjectFiles.First(z => z.FullFilePath == selectedData.Value);
+        }
     }
 }
