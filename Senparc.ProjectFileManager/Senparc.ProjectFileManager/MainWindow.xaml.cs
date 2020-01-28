@@ -48,6 +48,9 @@ namespace Senparc.ProjectFileManager
             ProjectFiles = new List<PropertyGroup>();
             ProjectDocuments = new List<XDocument>();
             SelectedFile = new PropertyGroup() { FullFilePath = $"[ no file selectd ] - {SystemTime.Now}" };
+
+            lblFilePath.DataContext = SelectedFile;
+            lbFiles.DataContext = BindFileData;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -64,6 +67,12 @@ namespace Senparc.ProjectFileManager
             SenparcTrace.SendCustomLog("Task", "Search .csproj files begin.");
 
             var csprojFiles = Directory.GetFiles(path, "*.csproj", SearchOption.AllDirectories);
+            if (csprojFiles==null || csprojFiles.Length == 0)
+            {
+                MessageBox.Show("No valiable .csproj file！", "error");
+                return;
+            }
+
             foreach (var file in csprojFiles)
             {
                 try
@@ -107,6 +116,9 @@ namespace Senparc.ProjectFileManager
         {
             var selectedData = (KeyValuePair<string, string>)e.AddedItems[0];
             SelectedFile = ProjectFiles.First(z => z.FullFilePath == selectedData.Value);
+
+            //lblFilePath.DataContext = SelectedFile;
+            //lblFilePath.Content = SelectedFile.FullFilePath;
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Xml.Linq;
 
@@ -9,7 +11,7 @@ namespace Senparc.ProjectFileManager.Models
     /// <summary>
     /// .csproj file items in the first &lt;PropertyGroup&gt; tag
     /// </summary>
-    public class PropertyGroup
+    public class PropertyGroup: INotifyPropertyChanged
     {
         public string TargetFrameworks { get; set; }
         public string Version { get; set; }
@@ -28,13 +30,41 @@ namespace Senparc.ProjectFileManager.Models
         public string PackageReleaseNotes { get; set; }
         public string RepositoryUrl { get; set; }
 
-        #region 补充信息
+        #region Additional Information
         public XElement OriginalElement { get; set; }
 
         public string FileName => Path.GetFileName(FullFilePath);
         public string FullFilePath { get; set; }
+
         #endregion
 
+        #region INotifyPropertyChanged functions
+
+        private void UpdateProperty<T>(ref T properValue, T newValue, [CallerMemberName] string propertyName = "")
+        {
+            if (object.Equals(properValue, newValue))
+            {
+                return;
+            }
+            properValue = newValue;
+
+            OnPropertyChanged(propertyName);
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName]string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
+
+
+        /// <summary>
+        /// Create a PropertyGroup entity from XML.
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="fullFilePath"></param>
+        /// <returns></returns>
         public static PropertyGroup GetObjet(XElement element,string fullFilePath)
         {
             var projectFile = Senparc.CO2NET.Utilities.XmlUtility.Deserialize<PropertyGroup>(element.ToString()) as PropertyGroup;

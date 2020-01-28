@@ -35,7 +35,7 @@
                 </ListBox>
             </GroupBox>
             <Label Content="File Path:" Grid.Column="1" HorizontalAlignment="Left" Margin="4,5,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="lblFilePath" Content="{Binding SelectedFile.FullFilePath, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}" Grid.Column="1" HorizontalAlignment="Left" Margin="74,4,0,0" VerticalAlignment="Top" />
+            <Label x:Name="lblFilePath" Content="{Binding SelectedFile.FullFilePath, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}" Grid.Column="1" HorizontalAlignment="Left" Margin="74,4,0,0" VerticalAlignment="Top" DataContext="{Binding SelectedFile, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}" />
             <Grid Grid.Column="1" Margin="0,40,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
