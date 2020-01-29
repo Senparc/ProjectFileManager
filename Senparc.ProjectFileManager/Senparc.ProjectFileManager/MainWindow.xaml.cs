@@ -113,7 +113,6 @@ namespace Senparc.ProjectFileManager
                 return;
             }
 
-            tabPropertyGroup.Visibility = Visibility.Visible;
 
             //lbFiles.DataContext = ProjectFiles;
             //lbFiles.ItemsSource = ProjectFiles;
@@ -168,9 +167,7 @@ namespace Senparc.ProjectFileManager
 
             #endregion
 
-
-            //lblFilePath.DataContext = SelectedFile;
-            //lblFilePath.Content = SelectedFile.FullFilePath;
+            tabPropertyGroup.Visibility = Visibility.Visible;
         }
 
         private void linkSourceCode_RequestNavigate(object sender, RequestNavigateEventArgs e)
@@ -193,7 +190,8 @@ namespace Senparc.ProjectFileManager
         private void btnCurrentMajorVersionPlus_Click(object sender, RoutedEventArgs e)
         {
             ChangeFileVersion(SelectedFile, pg => pg.MajorVersion++);
-            //txtVersion.DataContext = SelectedFile;
+            //SelectedFile.Version = "changed";
+            txtVersion.DataContext = SelectedFile;
         }
 
         private void btnCurrentMinorVersionPlus_Click(object sender, RoutedEventArgs e)
