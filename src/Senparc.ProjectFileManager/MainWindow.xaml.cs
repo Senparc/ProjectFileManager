@@ -58,7 +58,6 @@ namespace Senparc.ProjectFileManager
             if (!_inited)
             {
                 lbFiles.DataContext = ProjectFiles;
-
                 _inited = true;
             }
 

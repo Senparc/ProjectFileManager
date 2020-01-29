@@ -51,9 +51,9 @@ Module.symvers
 Mkfile.old
 dkms.conf
 /.vs
-/Senparc.ProjectFileManager/.vs/Senparc.ProjectFileManager/v16
-/Senparc.ProjectFileManager/Senparc.ProjectFileManager/bin
-/Senparc.ProjectFileManager/Senparc.ProjectFileManager/obj
-/Senparc.ProjectFileManager/.vs/Senparc.ProjectFileManager/DesignTimeBuild
-/Senparc.ProjectFileManager/Senparc.ProjectFileManager.Tests/bin/Debug/netcoreapp3.1
-/Senparc.ProjectFileManager/Senparc.ProjectFileManager.Tests/obj
+/src/.vs/Senparc.ProjectFileManager/v16
+/src/Senparc.ProjectFileManager/bin
+/src/Senparc.ProjectFileManager/obj
+/src/.vs/Senparc.ProjectFileManager/DesignTimeBuild
+/src/Senparc.ProjectFileManager.Tests/bin/Debug/netcoreapp3.1
+/src/Senparc.ProjectFileManager.Tests/obj
