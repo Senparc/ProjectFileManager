@@ -30,7 +30,7 @@
 
         <!--Row 2-->
         <Label Content="File Directory: " Grid.Row="1" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center"/>
-        <TextBox x:Name="txtPath" Grid.Row="1" HorizontalAlignment="Left" Margin="125,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="629" Text="E:\Senparc项目\WeiXinMPSDK.netcore\src"/>
+        <TextBox x:Name="txtPath" Grid.Row="1" HorizontalAlignment="Left" Margin="125,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="629"/>
         <Button x:Name="btnSearch" Content="Search"  Grid.Row="1" HorizontalAlignment="Left" Margin="775,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="0.141,-0.36" Click="btnSearch_Click"/>
 
         <!--Row 3-->

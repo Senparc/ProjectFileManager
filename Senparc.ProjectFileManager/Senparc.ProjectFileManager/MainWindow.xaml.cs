@@ -42,6 +42,7 @@ namespace Senparc.ProjectFileManager
             InitializeComponent();
             SenparcTrace.SendCustomLog("System", "Window opened.");
 
+            txtPath.Text = Environment.CurrentDirectory;
             Init();
         }
 
