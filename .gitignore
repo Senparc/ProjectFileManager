@@ -57,3 +57,4 @@ dkms.conf
 /src/.vs/Senparc.ProjectFileManager/DesignTimeBuild
 /src/Senparc.ProjectFileManager.Tests/bin/Debug/netcoreapp3.1
 /src/Senparc.ProjectFileManager.Tests/obj
+/images/how-to-use/how-to-use.psd
