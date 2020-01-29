@@ -5,14 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Senparc.ProjectFileManager"
         mc:Ignorable="d"
-        Title="MainWindow" Height="583" Width="1014">
+        Title="MainWindow" Height="599" Width="1014">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
         </Grid.RowDefinitions>
         <Label Content="路径：" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center"/>
-        <TextBox x:Name="txtPath" HorizontalAlignment="Left" Margin="75,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="629" Text="E:\Senparc项目\WeiXinMPSDK.netcore\Samples"/>
+        <TextBox x:Name="txtPath" HorizontalAlignment="Left" Margin="75,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="629" Text="E:\Senparc项目\WeiXinMPSDK.netcore\src"/>
         <Button Content="搜索" HorizontalAlignment="Left" Margin="716,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="0.141,-0.36" Click="Button_Click"/>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -42,9 +43,9 @@
             <Grid Grid.Column="1" Margin="0,70,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="120"></ColumnDefinition>
+                    <ColumnDefinition Width="10"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TabControl Grid.Column="0" x:Name="tabPropertyGroup">
+                <TabControl Grid.Column="0" x:Name="tabPropertyGroup" Margin="0,0,0,10">
                     <TabItem Header="Assembly">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -58,11 +59,13 @@
                                 <RowDefinition Height="38"></RowDefinition>
                             </Grid.RowDefinitions>
                             <!--TargetFramework-->
-                            <Label Grid.Row="0" Grid.Column="0" Content="TargetFramework:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <Label Grid.Row="0" Grid.Column="0" x:Name="lblTargetFramework" Content="TargetFramework:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                             <TextBox Grid.Row="0" Grid.Column="1" x:Name="txtTargetFramework" Text="{Binding TargetFramework, Mode=TwoWay}"  MaxLines="1"/>
-                            <!--Version-->
-                            <Label Grid.Row="1" Grid.Column="0" Content="Version:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                            <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtVersion" Text="{Binding Version, Mode=TwoWay}"  MaxLines="1"/>
+                            <!--TargetFrameworks-->
+                            <Label Grid.Row="1" Grid.Column="0" x:Name="lblTargetFrameworks" Content="TargetFrameworks:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtTargetFrameworks" Text="{Binding TargetFrameworks, Mode=TwoWay}"  MaxLines="1"/>
+
+
                             <!--AssemblyName-->
                             <Label Grid.Row="2" Grid.Column="0" Content="AssemblyName:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                             <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtAssemblyName" Text="{Binding AssemblyName, Mode=TwoWay}"  MaxLines="1"/>
@@ -71,7 +74,51 @@
                             <TextBox Grid.Row="3" Grid.Column="1" x:Name="txtRootNamespace" Text="{Binding RootNamespace, Mode=TwoWay}"  MaxLines="1"/>
                         </Grid>
                     </TabItem>
+                    <TabItem Header="Version">
+                        <Grid>
 
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="120"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"></RowDefinition>
+                                <RowDefinition Height="60"></RowDefinition>
+                                <RowDefinition Height="60"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <!--Row 1-->
+                            <Label Content="Current Version:" Grid.Column="0" VerticalAlignment="Center" HorizontalContentAlignment="Right"/>
+                            <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4" x:Name="txtVersion" Text="{Binding Version, Mode=TwoWay}"  MaxLines="1" Width="200" HorizontalAlignment="Left"/>
+
+
+                            <!--Row 2-->
+                            <Label Content="Current Project:" Grid.Column="0" Grid.Row="1"  VerticalAlignment="Center" HorizontalContentAlignment="Right"/>
+                            <Button Content="Major Version +1" Grid.Column="1" Grid.Row="1" x:Name="btnCurrentMajorVersionPlus" Margin="5,5,5,5" Click="btnCurrentMajorVersionPlus_Click" />
+                            <Button Content="Minor Version +1" Grid.Column="2"  Grid.Row="1" x:Name="btnCurrentMinorVersionPlus" Margin="5,5,5,5"/>
+                            <Button  Grid.Column="3" Grid.Row="1"   Margin="5,5,5,5"  x:Name="btnCurrentIncrementalVersionPlus" >
+                                <TextBlock TextWrapping="Wrap">
+                                    Incremental  Version +1
+                                </TextBlock>
+                            </Button>
+                            <Button Content="Build Number +1" Grid.Column="4" Grid.Row="1" x:Name="btnCurrenBuildVersionPlus" Margin="5,5,5,5" />
+
+                            <!--Row 3-->
+                            <Label Content="All Projects:" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalContentAlignment="Right"/>
+                            <Button Content="Major Version +1" Grid.Column="1"  Grid.Row="2" x:Name="btnAllMajorVersionPlus" Margin="5,5,5,5" />
+                            <Button Content="Minor Version +1" Grid.Column="2"   Grid.Row="2"  x:Name="btnAllMinorVersionPlus" Margin="5,5,5,5"/>
+                            <Button Grid.Column="3"  Grid.Row="2"  Margin="5,5,5,5" x:Name="btnAllIncrementalVersionPlus" >
+                                <TextBlock TextWrapping="Wrap">
+                                    Incremental  Version +1
+                                </TextBlock>
+                            </Button>
+                            <Button Content="Build Number +1" Grid.Column="4" Grid.Row="2"  Margin="5,5,5,5" x:Name="btnAllBuildVersionPlus" />
+                        </Grid>
+                    </TabItem>
                     <TabItem Header="Introductions">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -94,7 +141,7 @@
                             <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtCopyright" Text="{Binding Copyright, Mode=TwoWay}"  MaxLines="1"/>
                             <!--Description-->
                             <Label Grid.Row="2" Grid.Column="0" Content="Description:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                            <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtDescription" Text="{Binding Description, Mode=TwoWay}"/>
+                            <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtDescription" Text="{Binding Description, Mode=TwoWay}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
                             <!--Authors-->
                             <Label Grid.Row="3" Grid.Column="0" Content="Authors:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                             <TextBox Grid.Row="3" Grid.Column="1" x:Name="txtAuthors" Text="{Binding Authors, Mode=TwoWay}"/>
@@ -104,10 +151,9 @@
                             <!--Summary-->
                             <Label Grid.Row="5" Grid.Column="0" Content="Summary:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                             <TextBox Grid.Row="5" Grid.Column="1" x:Name="txtSummary" Text="{Binding Owners, Mode=TwoWay}"/>
-
                         </Grid>
                     </TabItem>
-                    <TabItem Header="Packages">
+                    <TabItem Header="Package">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="140"></ColumnDefinition>
@@ -121,7 +167,7 @@
                                 <RowDefinition Height="38"></RowDefinition>
                                 <RowDefinition Height="38"></RowDefinition>
                             </Grid.RowDefinitions>
-                            <!--Copyright-->
+                            <!--PackageTags-->
                             <Label Grid.Row="0" Grid.Column="0" Content="PackageTags:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                             <TextBox Grid.Row="0" Grid.Column="1" x:Name="txtPackageTags" Text="{Binding PackageTags, Mode=TwoWay}"  MaxLines="1"/>
                             <!--PackageLicenseUrl-->
@@ -141,8 +187,28 @@
                             <TextBox Grid.Row="5" Grid.Column="1" x:Name="txtRepositoryUrl" Text="{Binding RepositoryUrl, Mode=TwoWay}"  MaxLines="1"/>
                         </Grid>
                     </TabItem>
+                    <TabItem Header="PackageReleaseNotes">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <!--PackageReleaseNotes-->
+                            <TextBox Grid.Row="0" Grid.Column="0" x:Name="txtPackageReleaseNotes" Text="{Binding PackageReleaseNotes, Mode=TwoWay}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
+
+                        </Grid>
+                    </TabItem>
                 </TabControl>
             </Grid>
         </Grid>
+        <Label Grid.Row="2" Content="Copyright © 2020 Senparc" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBlock Grid.Row="2" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center">
+            <Hyperlink NavigateUri="https://github.com/Senparc/ProjectFileManager" Name="linkSourceCode" RequestNavigate="linkSourceCode_RequestNavigate">
+                Source Code > https://github.com/Senparc/ProjectFileManager
+            </Hyperlink>
+        </TextBlock>
+
     </Grid>
 </Window>

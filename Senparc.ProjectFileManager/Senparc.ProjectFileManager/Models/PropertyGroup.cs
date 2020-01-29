@@ -14,6 +14,7 @@ namespace Senparc.ProjectFileManager.Models
     public class PropertyGroup: INotifyPropertyChanged
     {
         public string TargetFramework { get; set; }
+        public string TargetFrameworks { get; set; }
         public string Version { get; set; }
         public string AssemblyName { get; set; }
         public string RootNamespace { get; set; }
@@ -25,6 +26,7 @@ namespace Senparc.ProjectFileManager.Models
         public string PackageLicenseUrl { get; set; }
         public string Title { get; set; }
         public string Summary { get; set; }
+        public string ProjectUrl { get; set; }
         public string PackageProjectUrl { get; set; }
         public string PackageIconUrl { get; set; }
         public string PackageReleaseNotes { get; set; }

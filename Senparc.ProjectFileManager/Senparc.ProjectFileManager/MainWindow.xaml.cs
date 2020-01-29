@@ -1,8 +1,10 @@
-﻿using Senparc.CO2NET.Trace;
+﻿using Senparc.CO2NET.Extensions;
+using Senparc.CO2NET.Trace;
 using Senparc.ProjectFileManager.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -128,13 +130,55 @@ namespace Senparc.ProjectFileManager
             SelectedFile = selectedData;
 
             tbFilePath.DataContext = SelectedFile;
-            txtTargetFramework.DataContext = SelectedFile;
-            txtVersion.DataContext = SelectedFile;
 
+            #region TabItems
+
+            //Assemble
+            txtTargetFramework.DataContext = SelectedFile;
+            txtTargetFramework.IsEnabled = lblTargetFramework.IsEnabled = !SelectedFile.TargetFramework.IsNullOrEmpty();
+
+            txtTargetFrameworks.DataContext = SelectedFile;
+            txtTargetFrameworks.IsEnabled =  lblTargetFrameworks.IsEnabled =!SelectedFile.TargetFrameworks.IsNullOrEmpty();
+
+            txtVersion.DataContext = SelectedFile;
+            txtAssemblyName.DataContext = SelectedFile;
+            txtRootNamespace.DataContext = SelectedFile;
+
+            //Introductions
+            txtTitle.DataContext = SelectedFile;
+            txtCopyright.DataContext = SelectedFile;
+            txtDescription.DataContext = SelectedFile;
+            txtAuthors.DataContext = SelectedFile;
+            txtOwners.DataContext = SelectedFile;
+            txtSummary.DataContext = SelectedFile;
+
+            //Package
+            txtPackageTags.DataContext = SelectedFile;
+            txtPackageLicenseUrl.DataContext = SelectedFile;
+            txtProjectUrl.DataContext = SelectedFile;
+            txtPackageProjectUrl.DataContext = SelectedFile;
+            txtPackageIconUrl.DataContext = SelectedFile;
+            txtRepositoryUrl.DataContext = SelectedFile;
+
+            //PackageReleaseNotes
+            txtPackageReleaseNotes.DataContext = SelectedFile;
+
+            #endregion
 
 
             //lblFilePath.DataContext = SelectedFile;
             //lblFilePath.Content = SelectedFile.FullFilePath;
+        }
+
+        private void linkSourceCode_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            Hyperlink link = sender as Hyperlink;
+            Process.Start(new ProcessStartInfo(link.NavigateUri.AbsoluteUri));
+        }
+
+        private void btnCurrentMajorVersionPlus_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
