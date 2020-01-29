@@ -134,22 +134,17 @@ namespace Senparc.ProjectFileManager
 
             #region TabItems
 
-            //Assemble
-            txtTargetFramework.DataContext = SelectedFile;
-            txtTargetFramework.IsEnabled = lblTargetFramework.IsEnabled = !SelectedFile.TargetFramework.IsNullOrEmpty();
-
-            txtTargetFrameworks.DataContext = SelectedFile;
-            txtTargetFrameworks.IsEnabled =  lblTargetFrameworks.IsEnabled =!SelectedFile.TargetFrameworks.IsNullOrEmpty();
-
+            //Version
             txtVersion.DataContext = SelectedFile;
-            txtAssemblyName.DataContext = SelectedFile;
-            txtRootNamespace.DataContext = SelectedFile;
+
+            //PackageReleaseNotes
+            txtPackageReleaseNotes.DataContext = SelectedFile;
 
             //Introductions
             txtTitle.DataContext = SelectedFile;
             txtCopyright.DataContext = SelectedFile;
-            txtDescription.DataContext = SelectedFile;
             txtAuthors.DataContext = SelectedFile;
+            txtDescription.DataContext = SelectedFile;
             txtOwners.DataContext = SelectedFile;
             txtSummary.DataContext = SelectedFile;
 
@@ -161,8 +156,15 @@ namespace Senparc.ProjectFileManager
             txtPackageIconUrl.DataContext = SelectedFile;
             txtRepositoryUrl.DataContext = SelectedFile;
 
-            //PackageReleaseNotes
-            txtPackageReleaseNotes.DataContext = SelectedFile;
+            //Assembly
+            txtTargetFramework.DataContext = SelectedFile;
+            txtTargetFramework.IsEnabled = lblTargetFramework.IsEnabled = !SelectedFile.TargetFramework.IsNullOrEmpty();
+
+            txtTargetFrameworks.DataContext = SelectedFile;
+            txtTargetFrameworks.IsEnabled = lblTargetFrameworks.IsEnabled = !SelectedFile.TargetFrameworks.IsNullOrEmpty();
+
+            txtAssemblyName.DataContext = SelectedFile;
+            txtRootNamespace.DataContext = SelectedFile;
 
             #endregion
 
@@ -190,8 +192,8 @@ namespace Senparc.ProjectFileManager
 
         private void btnCurrentMajorVersionPlus_Click(object sender, RoutedEventArgs e)
         {
-            SelectedFile.Version = "changed-"+SystemTime.Now;
-            //ChangeFileVersion(SelectedFile, pg => pg.MajorVersion++);
+            ChangeFileVersion(SelectedFile, pg => pg.MajorVersion++);
+            //txtVersion.DataContext = SelectedFile;
         }
 
         private void btnCurrentMinorVersionPlus_Click(object sender, RoutedEventArgs e)
