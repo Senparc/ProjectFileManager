@@ -5,17 +5,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Senparc.ProjectFileManager"
         mc:Ignorable="d"
-        Title="MainWindow" Height="599" Width="1084">
+        Title="MainWindow" Height="629" Width="1084">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="20"></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="30"></RowDefinition>
         </Grid.RowDefinitions>
-        <Label Content="路径：" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center"/>
-        <TextBox x:Name="txtPath" HorizontalAlignment="Left" Margin="75,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="629" Text="E:\Senparc项目\WeiXinMPSDK.netcore\src"/>
-        <Button Content="搜索" HorizontalAlignment="Left" Margin="716,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="0.141,-0.36" Click="Button_Click"/>
-        <Grid Grid.Row="1">
+
+        <!--Row 1-->
+        <Menu Grid.Row="0" >
+            <MenuItem Header="File..">
+                <MenuItem Header="Save Selected Project" x:Name="menuSaveOne" Click="menuSaveOne_Click"></MenuItem>
+                <MenuItem Header="Save All Projects" x:Name="menuSaveAll"></MenuItem>
+            </MenuItem>
+            <MenuItem x:Name="menuSearch" Header="Pick" Click="menuSearch_Click"></MenuItem>
+            <MenuItem Header="About..">
+                <MenuItem x:Name="menuSourceCode" Header="Source Code" Click="menuSourceCode_Click"></MenuItem>
+                <Separator></Separator>
+                <MenuItem x:Name="menuAbout" Header="About" Click="menuAbout_Click"></MenuItem>
+            </MenuItem>
+        </Menu>
+
+        <!--Row 2-->
+        <Label Content="File Directory: " Grid.Row="1" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center"/>
+        <TextBox x:Name="txtPath" Grid.Row="1" HorizontalAlignment="Left" Margin="125,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="629" Text="E:\Senparc项目\WeiXinMPSDK.netcore\src"/>
+        <Button x:Name="btnSearch" Content="Search"  Grid.Row="1" HorizontalAlignment="Left" Margin="775,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="0.141,-0.36" Click="btnSearch_Click"/>
+
+        <!--Row 3-->
+        <Grid Grid.Row="2" Margin="8,0,-8,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="380"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -38,7 +57,7 @@
             </GroupBox>
             <Label Content="File Path:" Grid.Column="1" HorizontalAlignment="Left" Margin="4,5,0,0" VerticalAlignment="Top"/>
             <Label Grid.Column="1" MaxWidth="540" HorizontalAlignment="Left" Margin="74,4,0,0" VerticalAlignment="Top">
-                <TextBlock x:Name="tbFilePath" Text="{Binding FullFilePath, Mode=OneWay}" TextWrapping="Wrap" ></TextBlock>
+                <TextBlock x:Name="tbFilePath" Text="{Binding FullFilePath, Mode=TwoWay}" TextWrapping="Wrap" ></TextBlock>
             </Label>
             <Grid Grid.Column="1" Margin="0,70,0,0">
                 <Grid.ColumnDefinitions>
@@ -198,8 +217,10 @@
                 </TabControl>
             </Grid>
         </Grid>
-        <Label Grid.Row="2" Content="Copyright © 2020 Senparc" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <TextBlock Grid.Row="2" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center">
+
+        <!--Row 4-->
+        <Label Grid.Row="3" Content="Copyright © 2020 Senparc" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBlock Grid.Row="3" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center">
             <Hyperlink NavigateUri="https://github.com/Senparc/ProjectFileManager" Name="linkSourceCode" RequestNavigate="linkSourceCode_RequestNavigate">
                 Source Code > https://github.com/Senparc/ProjectFileManager
             </Hyperlink>

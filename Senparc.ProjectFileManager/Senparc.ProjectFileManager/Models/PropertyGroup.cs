@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Senparc.CO2NET.Extensions;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Xml.Linq;
@@ -11,7 +14,7 @@ namespace Senparc.ProjectFileManager.Models
     /// <summary>
     /// .csproj file items in the first &lt;PropertyGroup&gt; tag
     /// </summary>
-    public class PropertyGroup: INotifyPropertyChanged
+    public class PropertyGroup : INotifyPropertyChanged
     {
         public string TargetFramework { get; set; }
         public string TargetFrameworks { get; set; }
@@ -67,7 +70,7 @@ namespace Senparc.ProjectFileManager.Models
         /// <param name="element"></param>
         /// <param name="fullFilePath"></param>
         /// <returns></returns>
-        public static PropertyGroup GetObjet(XElement element,string fullFilePath)
+        public static PropertyGroup GetObjet(XElement element, string fullFilePath)
         {
             var projectFile = Senparc.CO2NET.Utilities.XmlUtility.Deserialize<PropertyGroup>(element.ToString()) as PropertyGroup;
             if (projectFile == null)
@@ -78,6 +81,21 @@ namespace Senparc.ProjectFileManager.Models
             projectFile.FullFilePath = fullFilePath;
             projectFile.FileName = Path.GetFileName(fullFilePath);
             return projectFile;
+        }
+
+        public void Save()
+        {
+            var doc = XDocument.Load(FullFilePath);
+            var propertyGroup = doc.Root.Elements("PropertyGroup").First();
+            if (!TargetFramework.IsNullOrEmpty())
+            {
+
+            }
+        }
+
+        private void FillXml(Expression<Func<object>> obj, XElement element)
+        {
+           
         }
     }
 }

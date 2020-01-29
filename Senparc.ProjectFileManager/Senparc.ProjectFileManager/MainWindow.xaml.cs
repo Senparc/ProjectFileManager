@@ -1,4 +1,6 @@
-﻿using Senparc.CO2NET.Extensions;
+﻿using Microsoft.Win32;
+using Microsoft.WindowsAPICodePack.Dialogs;
+using Senparc.CO2NET.Extensions;
 using Senparc.CO2NET.Trace;
 using Senparc.ProjectFileManager.Helpers;
 using Senparc.ProjectFileManager.Models;
@@ -60,10 +62,10 @@ namespace Senparc.ProjectFileManager
             }
 
             SelectedFile.FullFilePath = $"[ no file selectd ] - {SystemTime.Now}";
-
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
             Init();
 
@@ -91,7 +93,8 @@ namespace Senparc.ProjectFileManager
                     var propertyGroup = doc.Root.Elements("PropertyGroup").FirstOrDefault();
                     if (propertyGroup == null)
                     {
-                        throw new Exception($"{file} is not a valid xml.csproj file.");
+                        SenparcTrace.SendCustomLog("Task Falid", $"{file} is not a valid xml.csproj file.");
+                        continue;
                     }
 
                     var projectFile = PropertyGroup.GetObjet(propertyGroup, file);
@@ -113,6 +116,10 @@ namespace Senparc.ProjectFileManager
                 return;
             }
 
+            if (lbFiles.Items.Count > 0)
+            {
+                lbFiles.SelectedIndex = 0;//default select the first item.
+            }
 
             //lbFiles.DataContext = ProjectFiles;
             //lbFiles.ItemsSource = ProjectFiles;
@@ -126,6 +133,10 @@ namespace Senparc.ProjectFileManager
 
         private void lbFiles_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (e.AddedItems.Count == 0)
+            {
+                return;//when re-research the files, the list will be cleared at first.
+            }
             var selectedData = (PropertyGroup)e.AddedItems[0];
             SelectedFile = selectedData;
 
@@ -173,15 +184,31 @@ namespace Senparc.ProjectFileManager
         private void linkSourceCode_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
             Hyperlink link = sender as Hyperlink;
-            Process.Start(new ProcessStartInfo(link.NavigateUri.AbsoluteUri));
+            System.Diagnostics.Process.Start(new ProcessStartInfo(link.NavigateUri.AbsoluteUri));
+            e.Handled = true;
         }
 
         #region Change Version
         private void ChangeFileVersion(PropertyGroup propertyGroup, Action<VersionObject> versionOperate)
         {
-            var version = VersionHelper.GetVersionObject(propertyGroup.Version);
-            versionOperate(version);
-            propertyGroup.Version = version.ToString();
+            try
+            {
+                var version = VersionHelper.GetVersionObject(propertyGroup.Version);
+                versionOperate(version);
+                propertyGroup.Version = version.ToString();
+
+            }
+            catch (Exception ex)
+            {
+                //some projects many not have a invalid verion number.
+                SenparcTrace.SendCustomLog("version not changed", ex.Message);
+            }
+            finally
+            {
+                txtVersion.DataContext = SelectedFile;
+                txtVersion.Dispatcher.Invoke(() => txtVersion.Text = SelectedFile.Version);
+            }
+
         }
 
         #region Current Project
@@ -191,7 +218,6 @@ namespace Senparc.ProjectFileManager
         {
             ChangeFileVersion(SelectedFile, pg => pg.MajorVersion++);
             //SelectedFile.Version = "changed";
-            txtVersion.DataContext = SelectedFile;
         }
 
         private void btnCurrentMinorVersionPlus_Click(object sender, RoutedEventArgs e)
@@ -236,5 +262,42 @@ namespace Senparc.ProjectFileManager
         #endregion
 
         #endregion
+
+        private void menuSearch_Click(object sender, RoutedEventArgs e)
+        {
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+            dialog.IsFolderPicker = true;
+            var result = dialog.ShowDialog();
+            if (result == CommonFileDialogResult.Ok)
+            {
+                string filePath = dialog.FileName;
+                txtPath.Text = filePath;
+                btnSearch_Click(btnSearch, e);
+            }
+        }
+
+        private void menuSourceCode_Click(object sender, RoutedEventArgs e)
+        {
+            var iePath = Environment.ExpandEnvironmentVariables(
+         @"%PROGRAMFILES%\Internet Explorer\iexplore.exe");
+            System.Diagnostics.Process.Start(iePath, "https://github.com/Senparc/ProjectFileManager");
+            e.Handled = true;
+        }
+
+        private void menuAbout_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(@"      Senparc.ProjectFileManager can help developers to manage .csproj files under the certain path.
+      You can use this tool to modify project file information or manage version information individually or in bulk.", "About Senparc.ProjectFileManager");
+        }
+
+        #region Save
+
+        private void menuSaveOne_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        #endregion
+
     }
 }
