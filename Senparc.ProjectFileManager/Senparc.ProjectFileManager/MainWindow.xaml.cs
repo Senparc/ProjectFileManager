@@ -1,5 +1,6 @@
 ﻿using Senparc.CO2NET.Extensions;
 using Senparc.CO2NET.Trace;
+using Senparc.ProjectFileManager.Helpers;
 using Senparc.ProjectFileManager.Models;
 using System;
 using System.Collections.Generic;
@@ -176,9 +177,64 @@ namespace Senparc.ProjectFileManager
             Process.Start(new ProcessStartInfo(link.NavigateUri.AbsoluteUri));
         }
 
+        #region Change Version
+        private void ChangeFileVersion(PropertyGroup propertyGroup, Action<VersionObject> versionOperate)
+        {
+            var version = VersionHelper.GetVersionObject(propertyGroup.Version);
+            versionOperate(version);
+            propertyGroup.Version = version.ToString();
+        }
+
+        #region Current Project
+
+
         private void btnCurrentMajorVersionPlus_Click(object sender, RoutedEventArgs e)
         {
-
+            SelectedFile.Version = "changed-"+SystemTime.Now;
+            //ChangeFileVersion(SelectedFile, pg => pg.MajorVersion++);
         }
+
+        private void btnCurrentMinorVersionPlus_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeFileVersion(SelectedFile, pg => pg.MinorVersion++);
+        }
+
+        private void btnCurrentIncrementalVersionPlus_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeFileVersion(SelectedFile, pg => pg.RevisionVersion++);
+        }
+
+        private void btnCurrenBuildVersionPlus_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeFileVersion(SelectedFile, pg => pg.BuildNumberVersion++);
+        }
+        #endregion
+
+        #region All Projects
+
+        private void btnAllMajorVersionPlus_Click(object sender, RoutedEventArgs e)
+        {
+            ProjectFiles.ToList().ForEach(pgFile => ChangeFileVersion(pgFile, pg => pg.MajorVersion++));
+        }
+
+
+        private void btnAllMinorVersionPlus_Click(object sender, RoutedEventArgs e)
+        {
+            ProjectFiles.ToList().ForEach(pgFile => ChangeFileVersion(pgFile, pg => pg.MinorVersion++));
+        }
+
+        private void btnAllIncrementalVersionPlus_Click(object sender, RoutedEventArgs e)
+        {
+            ProjectFiles.ToList().ForEach(pgFile => ChangeFileVersion(pgFile, pg => pg.RevisionVersion++));
+        }
+
+        private void btnAllBuildVersionPlus_Click(object sender, RoutedEventArgs e)
+        {
+            ProjectFiles.ToList().ForEach(pgFile => ChangeFileVersion(pgFile, pg => pg.BuildNumberVersion++));
+        }
+
+        #endregion
+
+        #endregion
     }
 }

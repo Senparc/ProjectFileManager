@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Senparc.ProjectFileManager"
         mc:Ignorable="d"
-        Title="MainWindow" Height="599" Width="1014">
+        Title="MainWindow" Height="599" Width="1084">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"></RowDefinition>
@@ -99,24 +99,17 @@
                             <!--Row 2-->
                             <Label Content="Current Project:" Grid.Column="0" Grid.Row="1"  VerticalAlignment="Center" HorizontalContentAlignment="Right"/>
                             <Button Content="Major Version +1" Grid.Column="1" Grid.Row="1" x:Name="btnCurrentMajorVersionPlus" Margin="5,5,5,5" Click="btnCurrentMajorVersionPlus_Click" />
-                            <Button Content="Minor Version +1" Grid.Column="2"  Grid.Row="1" x:Name="btnCurrentMinorVersionPlus" Margin="5,5,5,5"/>
-                            <Button  Grid.Column="3" Grid.Row="1"   Margin="5,5,5,5"  x:Name="btnCurrentIncrementalVersionPlus" >
-                                <TextBlock TextWrapping="Wrap">
-                                    Incremental  Version +1
-                                </TextBlock>
-                            </Button>
-                            <Button Content="Build Number +1" Grid.Column="4" Grid.Row="1" x:Name="btnCurrenBuildVersionPlus" Margin="5,5,5,5" />
+                            <Button Content="Minor Version +1" Grid.Column="2"  Grid.Row="1" x:Name="btnCurrentMinorVersionPlus" Margin="5,5,5,5" Click="btnCurrentMinorVersionPlus_Click"/>
+                            <Button Content="Revision Version +1"  Grid.Column="3" Grid.Row="1"   Margin="5,5,5,5"  x:Name="btnCurrentIncrementalVersionPlus" Click="btnCurrentIncrementalVersionPlus_Click" />
+                            <Button Content="Build Number +1" Grid.Column="4" Grid.Row="1" x:Name="btnCurrenBuildVersionPlus" Margin="5,5,5,5" Click="btnCurrenBuildVersionPlus_Click" />
 
                             <!--Row 3-->
                             <Label Content="All Projects:" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalContentAlignment="Right"/>
-                            <Button Content="Major Version +1" Grid.Column="1"  Grid.Row="2" x:Name="btnAllMajorVersionPlus" Margin="5,5,5,5" />
-                            <Button Content="Minor Version +1" Grid.Column="2"   Grid.Row="2"  x:Name="btnAllMinorVersionPlus" Margin="5,5,5,5"/>
-                            <Button Grid.Column="3"  Grid.Row="2"  Margin="5,5,5,5" x:Name="btnAllIncrementalVersionPlus" >
-                                <TextBlock TextWrapping="Wrap">
-                                    Incremental  Version +1
-                                </TextBlock>
-                            </Button>
-                            <Button Content="Build Number +1" Grid.Column="4" Grid.Row="2"  Margin="5,5,5,5" x:Name="btnAllBuildVersionPlus" />
+                            <Button Content="Major Version +1" Grid.Column="1"  Grid.Row="2" x:Name="btnAllMajorVersionPlus" Margin="5,5,5,5" Click="btnAllMajorVersionPlus_Click" />
+                            <Button Content="Minor Version +1" Grid.Column="2"   Grid.Row="2"  x:Name="btnAllMinorVersionPlus" Margin="5,5,5,5" Click="btnAllMinorVersionPlus_Click"/>
+                            <Button Content="Revision Version +1" Grid.Column="3"  Grid.Row="2"  Margin="5,5,5,5" x:Name="btnAllIncrementalVersionPlus" Click="btnAllIncrementalVersionPlus_Click" />
+
+                            <Button Content="Build Number +1" Grid.Column="4" Grid.Row="2"  Margin="5,5,5,5" x:Name="btnAllBuildVersionPlus" Click="btnAllBuildVersionPlus_Click" />
                         </Grid>
                     </TabItem>
                     <TabItem Header="Introductions">

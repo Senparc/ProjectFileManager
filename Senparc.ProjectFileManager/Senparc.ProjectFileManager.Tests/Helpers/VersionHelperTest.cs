@@ -21,6 +21,9 @@ namespace Senparc.ProjectFileManager.Tests.Helpers
             versionObject = VersionHelper.GetVersionObject(versionStr);
             Assert.AreEqual("3.0-preview3", versionObject.ToString());//just keep 2 segments
 
+            versionStr = "3.0.3.0_beta1";
+            versionObject = VersionHelper.GetVersionObject(versionStr);
+            Assert.AreEqual("3.0.3_beta1", versionObject.ToString());
 
         }
     }

@@ -55,3 +55,5 @@ dkms.conf
 /Senparc.ProjectFileManager/Senparc.ProjectFileManager/bin
 /Senparc.ProjectFileManager/Senparc.ProjectFileManager/obj
 /Senparc.ProjectFileManager/.vs/Senparc.ProjectFileManager/DesignTimeBuild
+/Senparc.ProjectFileManager/Senparc.ProjectFileManager.Tests/bin/Debug/netcoreapp3.1
+/Senparc.ProjectFileManager/Senparc.ProjectFileManager.Tests/obj
