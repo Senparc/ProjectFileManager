@@ -10,7 +10,7 @@ You can use this tool to modify project file information or manage version infor
  <img src="./images/how-to-use/how-to-use.gif" />
 
 ## License
---------------
+
 Apache License Version 2.0
 
 Detail: https://github.com/Senparc/ProjectFileManager/blob/master/LICENSE
