@@ -127,8 +127,8 @@ namespace Senparc.ProjectFileManager
             var selectedData = (PropertyGroup)e.AddedItems[0];
             SelectedFile = selectedData;
 
-            lblFilePath.DataContext = SelectedFile;
-            txtTargetFrameworks.DataContext = SelectedFile;
+            tbFilePath.DataContext = SelectedFile;
+            txtTargetFramework.DataContext = SelectedFile;
 
 
             //lblFilePath.DataContext = SelectedFile;

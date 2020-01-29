@@ -36,18 +36,18 @@
                 </ListBox>
             </GroupBox>
             <Label Content="File Path:" Grid.Column="1" HorizontalAlignment="Left" Margin="4,5,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="lblFilePath" 
-                   Content="{Binding FullFilePath, Mode=OneWay}" 
-                   Grid.Column="1" HorizontalAlignment="Left" Margin="74,4,0,0" VerticalAlignment="Top"
-                   />
+            <Label Grid.Column="1" MaxWidth="540" HorizontalAlignment="Left" Margin="74,4,0,0" VerticalAlignment="Top">
+                <TextBlock x:Name="tbFilePath" Text="{Binding FullFilePath, Mode=OneWay}" TextWrapping="Wrap" ></TextBlock>
+            </Label>
             <Grid Grid.Column="1" Margin="0,40,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="120"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TabControl Grid.Column="0" x:Name="tabPropertyGroup">
-                    <TabItem Header="TargetFrameworks">
-                        <TextBox x:Name="txtTargetFrameworks" MaxLines="1" VerticalAlignment="Top" FontSize="18"  Text="{Binding SelectedFile.TargetFrameworks, Mode=TwoWay}" />
+                    <TabItem Header="TargetFramework">
+                        <TextBox x:Name="txtTargetFramework" MaxLines="1" VerticalAlignment="Top" FontSize="18"
+                                 Text="{Binding TargetFramework, Mode=TwoWay}" />
                     </TabItem>
                     <TabItem Header="TabItem">
                         <Grid Background="#FFE5E5E5"/>

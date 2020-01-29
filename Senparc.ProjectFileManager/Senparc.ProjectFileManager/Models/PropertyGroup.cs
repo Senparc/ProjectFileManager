@@ -13,7 +13,7 @@ namespace Senparc.ProjectFileManager.Models
     /// </summary>
     public class PropertyGroup: INotifyPropertyChanged
     {
-        public string TargetFrameworks { get; set; }
+        public string TargetFramework { get; set; }
         public string Version { get; set; }
         public string AssemblyName { get; set; }
         public string RootNamespace { get; set; }
