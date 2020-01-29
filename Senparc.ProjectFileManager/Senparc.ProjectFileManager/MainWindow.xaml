@@ -39,18 +39,107 @@
             <Label Grid.Column="1" MaxWidth="540" HorizontalAlignment="Left" Margin="74,4,0,0" VerticalAlignment="Top">
                 <TextBlock x:Name="tbFilePath" Text="{Binding FullFilePath, Mode=OneWay}" TextWrapping="Wrap" ></TextBlock>
             </Label>
-            <Grid Grid.Column="1" Margin="0,40,0,0">
+            <Grid Grid.Column="1" Margin="0,70,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="120"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TabControl Grid.Column="0" x:Name="tabPropertyGroup">
-                    <TabItem Header="TargetFramework">
-                        <TextBox x:Name="txtTargetFramework" MaxLines="1" VerticalAlignment="Top" FontSize="18"
-                                 Text="{Binding TargetFramework, Mode=TwoWay}" />
+                    <TabItem Header="Assembly">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="140"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="38"></RowDefinition>
+                                <RowDefinition Height="38"></RowDefinition>
+                                <RowDefinition Height="38"></RowDefinition>
+                                <RowDefinition Height="38"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <!--TargetFramework-->
+                            <Label Grid.Row="0" Grid.Column="0" Content="TargetFramework:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBox Grid.Row="0" Grid.Column="1" x:Name="txtTargetFramework" Text="{Binding TargetFramework, Mode=TwoWay}"  MaxLines="1"/>
+                            <!--Version-->
+                            <Label Grid.Row="1" Grid.Column="0" Content="Version:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtVersion" Text="{Binding Version, Mode=TwoWay}"  MaxLines="1"/>
+                            <!--AssemblyName-->
+                            <Label Grid.Row="2" Grid.Column="0" Content="AssemblyName:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtAssemblyName" Text="{Binding AssemblyName, Mode=TwoWay}"  MaxLines="1"/>
+                            <!--RootNamespace-->
+                            <Label Grid.Row="3" Grid.Column="0" Content="RootNamespace:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBox Grid.Row="3" Grid.Column="1" x:Name="txtRootNamespace" Text="{Binding RootNamespace, Mode=TwoWay}"  MaxLines="1"/>
+                        </Grid>
                     </TabItem>
-                    <TabItem Header="TabItem">
-                        <Grid Background="#FFE5E5E5"/>
+
+                    <TabItem Header="Introductions">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="140"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="38"></RowDefinition>
+                                <RowDefinition Height="38"></RowDefinition>
+                                <RowDefinition Height="180"></RowDefinition>
+                                <RowDefinition Height="38"></RowDefinition>
+                                <RowDefinition Height="38"></RowDefinition>
+                                <RowDefinition Height="38"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <!--Title-->
+                            <Label Grid.Row="0" Grid.Column="0" Content="Title:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBox Grid.Row="0" Grid.Column="1" x:Name="txtTitle" Text="{Binding Title, Mode=TwoWay}"  MaxLines="1"/>
+                            <!--Copyright-->
+                            <Label Grid.Row="1" Grid.Column="0" Content="Copyright:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtCopyright" Text="{Binding Copyright, Mode=TwoWay}"  MaxLines="1"/>
+                            <!--Description-->
+                            <Label Grid.Row="2" Grid.Column="0" Content="Description:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtDescription" Text="{Binding Description, Mode=TwoWay}"/>
+                            <!--Authors-->
+                            <Label Grid.Row="3" Grid.Column="0" Content="Authors:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBox Grid.Row="3" Grid.Column="1" x:Name="txtAuthors" Text="{Binding Authors, Mode=TwoWay}"/>
+                            <!--Owners-->
+                            <Label Grid.Row="4" Grid.Column="0" Content="Owners:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBox Grid.Row="4" Grid.Column="1" x:Name="txtOwners" Text="{Binding Owners, Mode=TwoWay}"/>
+                            <!--Summary-->
+                            <Label Grid.Row="5" Grid.Column="0" Content="Summary:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBox Grid.Row="5" Grid.Column="1" x:Name="txtSummary" Text="{Binding Owners, Mode=TwoWay}"/>
+
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Packages">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="140"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="38"></RowDefinition>
+                                <RowDefinition Height="38"></RowDefinition>
+                                <RowDefinition Height="38"></RowDefinition>
+                                <RowDefinition Height="38"></RowDefinition>
+                                <RowDefinition Height="38"></RowDefinition>
+                                <RowDefinition Height="38"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <!--Copyright-->
+                            <Label Grid.Row="0" Grid.Column="0" Content="PackageTags:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBox Grid.Row="0" Grid.Column="1" x:Name="txtPackageTags" Text="{Binding PackageTags, Mode=TwoWay}"  MaxLines="1"/>
+                            <!--PackageLicenseUrl-->
+                            <Label Grid.Row="1" Grid.Column="0" Content="PackageLicenseUrl:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtPackageLicenseUrl" Text="{Binding PackageLicenseUrl, Mode=TwoWay}"  MaxLines="1"/>
+                            <!--ProjectUrl-->
+                            <Label Grid.Row="2" Grid.Column="0" Content="ProjectUrl:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtProjectUrl" Text="{Binding ProjectUrl, Mode=TwoWay}"  MaxLines="1"/>
+                            <!--PackageProjectUrl-->
+                            <Label Grid.Row="3" Grid.Column="0" Content="PackageProjectUrl:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBox Grid.Row="3" Grid.Column="1" x:Name="txtPackageProjectUrl" Text="{Binding PackageProjectUrl, Mode=TwoWay}"  MaxLines="1"/>
+                            <!--PackageIconUrl-->
+                            <Label Grid.Row="4" Grid.Column="0" Content="PackageIconUrl:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBox Grid.Row="4" Grid.Column="1" x:Name="txtPackageIconUrl" Text="{Binding PackageIconUrl, Mode=TwoWay}"  MaxLines="1"/>
+                            <!--RepositoryUrl-->
+                            <Label Grid.Row="5" Grid.Column="0" Content="RepositoryUrl:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBox Grid.Row="5" Grid.Column="1" x:Name="txtRepositoryUrl" Text="{Binding RepositoryUrl, Mode=TwoWay}"  MaxLines="1"/>
+                        </Grid>
                     </TabItem>
                 </TabControl>
             </Grid>

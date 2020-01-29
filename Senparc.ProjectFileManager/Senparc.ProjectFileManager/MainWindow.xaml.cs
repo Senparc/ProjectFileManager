@@ -129,6 +129,8 @@ namespace Senparc.ProjectFileManager
 
             tbFilePath.DataContext = SelectedFile;
             txtTargetFramework.DataContext = SelectedFile;
+            txtVersion.DataContext = SelectedFile;
+
 
 
             //lblFilePath.DataContext = SelectedFile;
