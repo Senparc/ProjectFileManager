@@ -58,3 +58,4 @@ dkms.conf
 /src/Senparc.ProjectFileManager.Tests/bin/Debug/netcoreapp3.1
 /src/Senparc.ProjectFileManager.Tests/obj
 /images/how-to-use/how-to-use.psd
+/src/Senparc.ProjectFileManager/Properties/PublishProfiles
