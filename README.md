@@ -7,7 +7,7 @@ You can use this tool to modify project file information or manage version infor
 
 ## How to use
 
- <img src="images/how-to-use/how-to-use.gif" />
+ <img src="/tree/master/images/how-to-use/how-to-use.gif" />
 
 ## License
 --------------
