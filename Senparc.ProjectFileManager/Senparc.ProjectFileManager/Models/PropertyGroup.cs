@@ -7,6 +7,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Xml;
 using System.Xml.Linq;
 
 namespace Senparc.ProjectFileManager.Models
@@ -86,16 +87,62 @@ namespace Senparc.ProjectFileManager.Models
         public void Save()
         {
             var doc = XDocument.Load(FullFilePath);
-            var propertyGroup = doc.Root.Elements("PropertyGroup").First();
-            if (!TargetFramework.IsNullOrEmpty())
+            var propertyGroup = doc.Root.Elements("PropertyGroup").FirstOrDefault();
+            if (propertyGroup == null)
             {
-
+                return;
             }
+
+            FillXml(propertyGroup, "TargetFramework", TargetFramework);
+            FillXml(propertyGroup, "TargetFrameworks", TargetFrameworks);
+            FillXml(propertyGroup, "Version", Version);
+            FillXml(propertyGroup, "AssemblyName", AssemblyName);
+            FillXml(propertyGroup, "RootNamespace", RootNamespace);
+            FillXml(propertyGroup, "Description", Description);
+            FillXml(propertyGroup, "Copyright", Copyright);
+            FillXml(propertyGroup, "PackageTags", PackageTags);
+            FillXml(propertyGroup, "Authors", Authors);
+            FillXml(propertyGroup, "Owners", Owners);
+            FillXml(propertyGroup, "PackageLicenseUrl", PackageLicenseUrl);
+            FillXml(propertyGroup, "Title", Title);
+            FillXml(propertyGroup, "Summary", Summary);
+            FillXml(propertyGroup, "ProjectUrl", ProjectUrl);
+            FillXml(propertyGroup, "PackageProjectUrl", PackageProjectUrl);
+            FillXml(propertyGroup, "PackageIconUrl", PackageIconUrl);
+
+            PackageReleaseNotes = PackageReleaseNotes.TrimEnd() + Environment.NewLine;
+            FillXml(propertyGroup, "PackageReleaseNotes", PackageReleaseNotes);
+            FillXml(propertyGroup, "RepositoryUrl", RepositoryUrl);
+
+            XmlWriterSettings xws = new XmlWriterSettings();
+            xws.OmitXmlDeclaration = true;
+            xws.Indent = true;
+            var encoding = new UTF8Encoding(false);
+            xws.Encoding = encoding;
+            using (XmlWriter xw = XmlWriter.Create(FullFilePath, xws))
+            {
+                doc.Save(xw);
+            }
+
         }
 
-        private void FillXml(Expression<Func<object>> obj, XElement element)
+        private void FillXml(XElement propertyGroupElement, string elementName, string value)
         {
-           
+            if (value.IsNullOrEmpty())
+            {
+                return;
+            }
+
+            var element = propertyGroupElement.Element(elementName);
+            if (element == null)
+            {
+                element = new XElement(elementName, value);
+                propertyGroupElement.Add(element);
+            }
+            else
+            {
+                element.SetValue(value);
+            }
         }
     }
 }

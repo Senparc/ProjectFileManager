@@ -18,7 +18,7 @@
         <Menu Grid.Row="0" >
             <MenuItem Header="File..">
                 <MenuItem Header="Save Selected Project" x:Name="menuSaveOne" Click="menuSaveOne_Click"></MenuItem>
-                <MenuItem Header="Save All Projects" x:Name="menuSaveAll"></MenuItem>
+                <MenuItem Header="Save All Projects" x:Name="menuSaveAll" Click="menuSaveAll_Click"></MenuItem>
             </MenuItem>
             <MenuItem x:Name="menuSearch" Header="Pick" Click="menuSearch_Click"></MenuItem>
             <MenuItem Header="About..">

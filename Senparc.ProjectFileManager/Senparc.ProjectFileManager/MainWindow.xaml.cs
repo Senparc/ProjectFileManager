@@ -294,10 +294,39 @@ namespace Senparc.ProjectFileManager
 
         private void menuSaveOne_Click(object sender, RoutedEventArgs e)
         {
+            txtPath.Focus();
+            if (SelectedFile==null)
+            {
+                MessageBox.Show("Please choose one project!");
+            }
 
+            SelectedFile.Save();
+
+            MessageBox.Show($"File saved:\r\n{SelectedFile.FullFilePath}");
+        }
+
+        private void menuSaveAll_Click(object sender, RoutedEventArgs e)
+        {
+            txtPath.Focus();
+
+            int i = 0;
+            foreach (var projectFile in ProjectFiles)
+            {
+                try
+                {
+                    projectFile.Save();
+                    i++;
+                }
+                catch 
+                {
+
+                }
+            }
+            MessageBox.Show($"All files saved: {i}/{ProjectFiles.Count}");
         }
 
         #endregion
+
 
     }
 }
