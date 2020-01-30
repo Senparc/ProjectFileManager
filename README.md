@@ -17,7 +17,7 @@ You can use this tool to modify project file information or manage version infor
 
 ## Use Source Code
 
-All the source code is in the [/src](/src) floder, use Visual Studio or Visual Studio Code to open the `Senparc.ProjectFileManager.sln` file. You can modify the code and compile the program by yourself. 
+All the source code is in the [/src](/src) folder, use Visual Studio or Visual Studio Code to open the `Senparc.ProjectFileManager.sln` file. You can modify the code and compile the program by yourself. 
 
 The project is based on .NET Core 3.1 + WPF, so you need to install [.NET Core 3.1 SDK](https://dotnet.microsoft.com/download/dotnet-core/thank-you/sdk-3.1.101-windows-x64-installer) (or higher) before compile the program.
 
