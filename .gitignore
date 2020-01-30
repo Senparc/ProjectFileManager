@@ -60,3 +60,4 @@ dkms.conf
 /images/how-to-use/how-to-use.psd
 /src/Senparc.ProjectFileManager/Properties/PublishProfiles
 /images/how-to-use/how-to-use-v0.1.0.psd
+*.psd

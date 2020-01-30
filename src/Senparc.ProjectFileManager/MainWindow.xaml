@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Senparc.ProjectFileManager"
         mc:Ignorable="d"
-        Title="Senparc.ProjectFileManager" Height="629" Width="1084" WindowStyle="ThreeDBorderWindow">
+        Title="Senparc.ProjectFileManager" Height="629" Width="1084" WindowStyle="ThreeDBorderWindow" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"></RowDefinition>
