@@ -7,23 +7,27 @@ You can use this tool to modify project file information or manage version infor
 
 ## How to use
 
- <img src="images/how-to-use/how-to-use.gif" />
+ <img src="./images/how-to-use/how-to-use.gif" />
+
+## Use .exe Application Directly
+
+1. Open [Release Page](https://github.com/Senparc/ProjectFileManager/releases), download the program package from Assets, such as: `Senparc.ProjectFileManager_0.1.0.zip`.
+
+2. Unzip the file and execute `Senparc.ProjectFileManager.exe` file.
+
+## Use Source Code
+
+All the source code is in the [/src](/src) floder, use Visual Studio or Visual Studio Code to open the `Senparc.ProjectFileManager.sln` file. You can modify the code and compile the program by yourself. 
+
+The project is based on .NET Core 3.1 + WPF, so you need to install [.NET Core 3.1 SDK](https://dotnet.microsoft.com/download/dotnet-core/thank-you/sdk-3.1.101-windows-x64-installer) (or higher) before compile the program.
+
+This is also a project where you can learn the .NET Core and WPF program code.
+
+You are welcome to contribute your own code.
+
 
 ## License
---------------
+
 Apache License Version 2.0
 
-```
-Copyright 2019 Jeffrey Su & Suzhou Senparc Network Technology Co.,Ltd.
-
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file 
-except in compliance with the License. You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software distributed under the 
-License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, 
-either express or implied. See the License for the specific language governing permissions 
-and limitations under the License.
-```
 Detail: https://github.com/Senparc/ProjectFileManager/blob/master/LICENSE
