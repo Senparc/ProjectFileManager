@@ -358,9 +358,10 @@ namespace Senparc.ProjectFileManager
                     projectFile.Save();
                     i++;
                 }
-                catch
+                catch (Exception ex)
                 {
-                    notSaved.Add(projectFile.FileName);
+                    notSaved.Add($@"{projectFile.FileName}
+[{ex.Message}]");
                 }
             }
             var msg = $"All files saved: {i}/{ProjectFiles.Count}";
@@ -371,9 +372,9 @@ namespace Senparc.ProjectFileManager
 The following files are not saved:
 
 ";
-                foreach (var file in ProjectFiles)
+                foreach (var file in notSaved)
                 {
-                    msg += file.FileName + Environment.NewLine;
+                    msg += file + Environment.NewLine+ Environment.NewLine;
                 }
             }
 
