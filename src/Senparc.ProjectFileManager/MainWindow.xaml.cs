@@ -146,6 +146,17 @@ namespace Senparc.ProjectFileManager
 
             //Version
             txtVersion.DataContext = SelectedFile;
+            try
+            {
+                var selectedVersion = VersionHelper.GetVersionObject(SelectedFile.Version);
+                txtQualifier.Text = selectedVersion.QualifierVersion;
+
+            }
+            catch
+            {
+                txtQualifier.Text = "";
+            }
+
 
             //PackageReleaseNotes
             txtPackageReleaseNotes.DataContext = SelectedFile;
@@ -205,10 +216,18 @@ namespace Senparc.ProjectFileManager
             }
             finally
             {
-                txtVersion.DataContext = SelectedFile;
+                VersionObject version = null;
+                try
+                {
+                    version = VersionHelper.GetVersionObject(SelectedFile.Version);
+                }
+                catch
+                {
+                    version = new VersionObject();
+                }
                 txtVersion.Dispatcher.Invoke(() => txtVersion.Text = SelectedFile.Version);
+                txtQualifier.Dispatcher.Invoke(() => txtQualifier.Text = version.QualifierVersion);
             }
-
         }
 
         #region Current Project
@@ -259,6 +278,18 @@ namespace Senparc.ProjectFileManager
             ProjectFiles.ToList().ForEach(pgFile => ChangeFileVersion(pgFile, pg => pg.BuildNumberVersion++));
         }
 
+        private void btnAllQualifierVersion_Click(object sender, RoutedEventArgs e)
+        {
+            var qualifierVersion = txtQualifier.Text;
+
+            if (qualifierVersion.Length > 0 && int.TryParse(qualifierVersion.Substring(0, 1), out _))
+            {
+                qualifierVersion = "-" + qualifierVersion;//qualifier version can not start with a number
+            }
+
+            ProjectFiles.ToList().ForEach(pgFile => ChangeFileVersion(pgFile, pg => pg.QualifierVersion = qualifierVersion));
+        }
+
         #endregion
 
         #endregion
@@ -295,7 +326,7 @@ namespace Senparc.ProjectFileManager
         private void menuSaveOne_Click(object sender, RoutedEventArgs e)
         {
             txtPath.Focus();
-            if (SelectedFile==null)
+            if (SelectedFile == null)
             {
                 MessageBox.Show("Please choose one project!");
             }
@@ -317,13 +348,14 @@ namespace Senparc.ProjectFileManager
                     projectFile.Save();
                     i++;
                 }
-                catch 
+                catch
                 {
 
                 }
             }
             MessageBox.Show($"All files saved: {i}/{ProjectFiles.Count}");
         }
+
 
         #endregion
 
