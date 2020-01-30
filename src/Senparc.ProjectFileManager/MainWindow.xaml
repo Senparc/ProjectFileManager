@@ -40,20 +40,29 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <GroupBox Grid.Column="0" Header="Peoject Files" Margin="7,12,0,8" HorizontalAlignment="Left" Width="369">
-                <ListBox x:Name="lbFiles" VerticalContentAlignment="Center" SelectionChanged="lbFiles_SelectionChanged" SelectionMode="Single" 
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <ListBox Grid.Row="0" x:Name="lbFiles" VerticalContentAlignment="Center" SelectionChanged="lbFiles_SelectionChanged" SelectionMode="Single" 
                          ItemsSource="{Binding ProjectFiles,Mode=OneWay}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <!--<ColumnDefinition Width="300"></ColumnDefinition>-->
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" Background="LightBlue" Content="{Binding Path=FileName, Mode=TwoWay}"></Label>
-                            </Grid>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="40"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Button x:Name="btnRemoveFileItem" Grid.Column="0" Content="✖" Background="LightCyan" Click="btnRemoveFileItem_Click"></Button>
+                                    <Label Grid.Column="1" Background="LightBlue" Content="{Binding Path=FileName, Mode=TwoWay}"></Label>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <TextBox Grid.Row="1" x:Name="txtRemoveKeywords" Margin="0,5,100,0" Text="Test,Sample"></TextBox>
+                    <Button Grid.Row="1" x:Name="btnRemoveKeywords"  Margin="0,5,0,0" Content="Remove" Width="90" HorizontalAlignment="Right" Click="btnRemoveKeywords_Click"></Button>
+                </Grid>
             </GroupBox>
             <Label Content="File Path:" Grid.Column="1" HorizontalAlignment="Left" Margin="4,5,0,0" VerticalAlignment="Top"/>
             <Label Grid.Column="1" MaxWidth="540" HorizontalAlignment="Left" Margin="74,4,0,0" VerticalAlignment="Top">

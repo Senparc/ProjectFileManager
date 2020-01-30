@@ -331,9 +331,18 @@ namespace Senparc.ProjectFileManager
                 MessageBox.Show("Please choose one project!");
             }
 
-            SelectedFile.Save();
+            try
+            {
+                SelectedFile.Save();
+                MessageBox.Show($"File saved:\r\n{SelectedFile.FullFilePath}", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($@"File save faild:\r\n{SelectedFile.FullFilePath}
 
-            MessageBox.Show($"File saved:\r\n{SelectedFile.FullFilePath}");
+{ex.Message}", "Success", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
         }
 
         private void menuSaveAll_Click(object sender, RoutedEventArgs e)
@@ -341,6 +350,7 @@ namespace Senparc.ProjectFileManager
             txtPath.Focus();
 
             int i = 0;
+            List<string> notSaved = new List<string>();
             foreach (var projectFile in ProjectFiles)
             {
                 try
@@ -350,15 +360,52 @@ namespace Senparc.ProjectFileManager
                 }
                 catch
                 {
-
+                    notSaved.Add(projectFile.FileName);
                 }
             }
-            MessageBox.Show($"All files saved: {i}/{ProjectFiles.Count}");
+            var msg = $"All files saved: {i}/{ProjectFiles.Count}";
+            if (i < ProjectFiles.Count)
+            {
+                msg += @"
+
+The following files are not saved:
+
+";
+                foreach (var file in ProjectFiles)
+                {
+                    msg += file.FileName + Environment.NewLine;
+                }
+            }
+
+            MessageBox.Show(msg, "Complete", MessageBoxButton.OK, MessageBoxImage.Information);
         }
+
 
 
         #endregion
 
+        private void btnRemoveKeywords_Click(object sender, RoutedEventArgs e)
+        {
+            txtRemoveKeywords.Text.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries)
+                .ToList()
+                .ForEach(kw =>
+                {
+                    var keyword = kw.Trim();
+                    if (keyword.Length == 0)
+                    {
+                        return;
+                    }
 
+                    var tobeRemvoe = ProjectFiles.Where(z => z.FileName.Contains(keyword, StringComparison.OrdinalIgnoreCase)).ToList();
+                    tobeRemvoe.ForEach(z => ProjectFiles.Remove(z));
+                });
+        }
+
+        private void btnRemoveFileItem_Click(object sender, RoutedEventArgs e)
+        {
+            var propertyGroup = (PropertyGroup)((Button)e.OriginalSource).DataContext;
+            ProjectFiles.Remove(propertyGroup);
+            e.Handled = true;
+        }
     }
 }
