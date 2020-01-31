@@ -9,6 +9,8 @@ You can use this tool to modify project file information or manage version infor
 
  <img src="./images/how-to-use/how-to-use.gif" />
 
+ > If you want to test the project in the example above, you can download the project [here](https://github.com/JeffreySu/WeiXinMPSDK) and specify the directory to [/src](https://github.com/Senparc/ProjectFileManager/tree/master/src).
+
 ## Use .exe Application Directly
 
 1. Open [Release Page](https://github.com/Senparc/ProjectFileManager/releases), download the program package from Assets, such as: `Senparc.ProjectFileManager_0.1.0.zip`.
