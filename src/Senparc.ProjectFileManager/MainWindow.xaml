@@ -89,36 +89,46 @@
                                 <RowDefinition Height="60"></RowDefinition>
                                 <RowDefinition Height="20"></RowDefinition>
                                 <RowDefinition Height="60"></RowDefinition>
+                                <RowDefinition Height="40"></RowDefinition>
+                                <RowDefinition Height="8"></RowDefinition>
                                 <RowDefinition Height="30"></RowDefinition>
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
 
                             <!--Row 1-->
-                            <Label Content="Current Version:" Grid.Column="0" VerticalAlignment="Center" HorizontalContentAlignment="Right"/>
+                            <Label   Grid.Row="0" Content="Current Version:" Grid.Column="0" VerticalAlignment="Center" HorizontalContentAlignment="Right"/>
                             <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4" x:Name="txtVersion" Text="{Binding Version, Mode=TwoWay}"  MaxLines="1" Width="200" HorizontalAlignment="Left"/>
 
 
                             <!--Row 2-->
-                            <Label Content="Current Project:" Grid.Column="0" Grid.Row="1"  VerticalAlignment="Center" HorizontalContentAlignment="Right"/>
-                            <Button Content="Major Version +1" Grid.Column="1" Grid.Row="1" x:Name="btnCurrentMajorVersionPlus" Margin="5,5,5,5" Click="btnCurrentMajorVersionPlus_Click" />
-                            <Button Content="Minor Version +1" Grid.Column="2"  Grid.Row="1" x:Name="btnCurrentMinorVersionPlus" Margin="5,5,5,5" Click="btnCurrentMinorVersionPlus_Click"/>
-                            <Button Content="Revision Version +1"  Grid.Column="3" Grid.Row="1"   Margin="5,5,5,5"  x:Name="btnCurrentIncrementalVersionPlus" Click="btnCurrentIncrementalVersionPlus_Click" />
-                            <Button Content="Build Number +1" Grid.Column="4" Grid.Row="1" x:Name="btnCurrenBuildVersionPlus" Margin="5,5,5,5" Click="btnCurrenBuildVersionPlus_Click" />
+                            <Label   Grid.Column="0" Grid.Row="1" Content="Current Project:"     VerticalAlignment="Center" HorizontalContentAlignment="Right"/>
+                            <Button  Grid.Column="1" Grid.Row="1" Content="Major Version +1"    x:Name="btnCurrentMajorVersionPlus" Margin="5,5,5,5" Click="btnCurrentMajorVersionPlus_Click" />
+                            <Button  Grid.Column="2" Grid.Row="1" Content="Minor Version +1"    x:Name="btnCurrentMinorVersionPlus" Margin="5,5,5,5" Click="btnCurrentMinorVersionPlus_Click"/>
+                            <Button  Grid.Column="3" Grid.Row="1" Content="Revision Version +1"   Margin="5,5,5,5"  x:Name="btnCurrentIncrementalVersionPlus" Click="btnCurrentIncrementalVersionPlus_Click" />
+                            <Button  Grid.Column="4" Grid.Row="1" Content="Build Number +1"     x:Name="btnCurrenBuildVersionPlus" Margin="5,5,5,5" Click="btnCurrenBuildVersionPlus_Click" />
 
                             <!--Row 3 Blank-->
 
                             <!--Row 4-->
-                            <Label Content="All Projects:" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" HorizontalContentAlignment="Right"/>
-                            <Button Content="Major Version +1" Grid.Column="1"  Grid.Row="3" x:Name="btnAllMajorVersionPlus" Margin="5,5,5,5" Click="btnAllMajorVersionPlus_Click" />
-                            <Button Content="Minor Version +1" Grid.Column="2"   Grid.Row="3"  x:Name="btnAllMinorVersionPlus" Margin="5,5,5,5" Click="btnAllMinorVersionPlus_Click"/>
-                            <Button Content="Revision Version +1" Grid.Column="3"  Grid.Row="3"  Margin="5,5,5,5" x:Name="btnAllIncrementalVersionPlus" Click="btnAllIncrementalVersionPlus_Click" />
-                            <Button Content="Build Number +1" Grid.Column="4" Grid.Row="3"  Margin="5,5,5,5" x:Name="btnAllBuildVersionPlus" Click="btnAllBuildVersionPlus_Click" />
+                            <Label  Grid.Column="0" Grid.Row="3"   Content="All Projects:"       VerticalAlignment="Center" HorizontalContentAlignment="Right"/>
+                            <Button Grid.Column="1" Grid.Row="3"  Content="Major Version +1"    x:Name="btnAllMajorVersionPlus" Margin="5,5,5,5" Click="btnAllMajorVersionPlus_Click" />
+                            <Button Grid.Column="2" Grid.Row="3" Content="Minor Version +1"     x:Name="btnAllMinorVersionPlus" Margin="5,5,5,5" Click="btnAllMinorVersionPlus_Click"/>
+                            <Button Grid.Column="3" Grid.Row="3"  Content="Revision Version +1" Margin="5,5,5,5" x:Name="btnAllIncrementalVersionPlus" Click="btnAllIncrementalVersionPlus_Click" />
+                            <Button Grid.Column="4" Grid.Row="3"   Content="Build Number +1"     Margin="5,5,5,5" x:Name="btnAllBuildVersionPlus" Click="btnAllBuildVersionPlus_Click" />
 
                             <!--Row 5-->
-                            <Label Content="Add Qualifier:" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" HorizontalContentAlignment="Right"/>
-                            <TextBox x:Name="txtQualifier"  Text="{Binding QualifierVersion, Mode=OneWay}"  MaxLines="1" Margin="5,0,0,0" Grid.Column="1" Grid.Row="4" TextWrapping="Wrap" Height="30"/>
-                            <Button x:Name="btnAllQualifierVersion" Content="Add to All Projects" Grid.Column="2" Grid.Row="4" Height="30" Click="btnAllQualifierVersion_Click" Margin="3,0,3,0" />
-                            <Label Content="e.g. -preview1" Grid.Column="3" Grid.Row="4" VerticalAlignment="Center" />
+                            <Button  Grid.Column="1" Grid.Row="4" Content="Sync to All Projects"    x:Name="btnSyncMajorVersion" Margin="5,5,5,5" Click="btnSyncMajorVersion_Click"  />
+                            <Button  Grid.Column="2" Grid.Row="4" Content="Sync to All Projects"    x:Name="btnSyncMinorVersion" Margin="5,5,5,5" Click="btnSyncMinorVersion_Click" />
+                            <Button  Grid.Column="3" Grid.Row="4" Content="Sync to All Projects"   Margin="5,5,5,5"  x:Name="btnSyncIncrementalVersion" Click="btnSyncIncrementalVersion_Click" />
+                            <Button  Grid.Column="4" Grid.Row="4" Content="Sync to All Projects"    x:Name="btnSyncBuildVersion" Margin="5,5,5,5" Click="btnSyncBuildVersion_Click" />
+
+                            <!--Row 6 Blank-->
+
+                            <!--Row 7-->
+                            <Label   Grid.Column="0" Grid.Row="6" Content="Add Qualifier:" VerticalAlignment="Center" HorizontalContentAlignment="Right"/>
+                            <TextBox Grid.Column="1" Grid.Row="6" x:Name="txtQualifier"  Text="{Binding QualifierVersion, Mode=OneWay}"  MaxLines="1" Margin="5,0,0,0" TextWrapping="Wrap" Height="30"/>
+                            <Button  Grid.Column="2" Grid.Row="6"  x:Name="btnAllQualifierVersion" Content="Add to All Projects" Height="30" Click="btnAllQualifierVersion_Click" Margin="3,0,3,0" />
+                            <Label   Grid.Column="3" Grid.Row="6" Content="e.g. -preview1"  VerticalAlignment="Center" />
 
                         </Grid>
                     </TabItem>

@@ -230,6 +230,26 @@ namespace Senparc.ProjectFileManager
             }
         }
 
+        private void SyncAllFileVersion(PropertyGroup propertyGroup,string versionName, Func<VersionObject,int> newVersionNumberFunc,Action<VersionObject,int> versionOperate)
+        {
+            if (SelectedFile.Version.IsNullOrEmpty())
+            {
+                MessageBox.Show("Current project doesn't have a valid version number!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (MessageBoxResult.Yes != MessageBox.Show($"Are you sure you want to synchronize the {versionName} of the current project to all projects?","Confirm", MessageBoxButton.YesNoCancel, MessageBoxImage.Question))
+            {
+                return;
+            }
+
+            var currentVersion = VersionHelper.GetVersionObject(SelectedFile.Version);
+            var newVersionNumber = newVersionNumberFunc(currentVersion);
+            ProjectFiles.ToList().ForEach(pgFile => ChangeFileVersion(pgFile, pg => versionOperate(pg, newVersionNumber)));
+
+            MessageBox.Show($"All project verion numbers({versionName}) have been changed to {currentVersion}!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
         #region Current Project
 
 
@@ -256,6 +276,30 @@ namespace Senparc.ProjectFileManager
         #endregion
 
         #region All Projects
+
+        #region Sync
+        private void btnSyncMajorVersion_Click(object sender, RoutedEventArgs e)
+        {
+            SyncAllFileVersion(SelectedFile, "Major Version",currentVersion=>currentVersion.MajorVersion, (pg, versionNumber) => pg.MajorVersion = versionNumber);
+        }
+
+        private void btnSyncMinorVersion_Click(object sender, RoutedEventArgs e)
+        {
+            SyncAllFileVersion(SelectedFile, "Minor Version", currentVersion => currentVersion.MinorVersion, (pg, versionNumber) => pg.MinorVersion = versionNumber);
+        }
+
+        private void btnSyncIncrementalVersion_Click(object sender, RoutedEventArgs e)
+        {
+            SyncAllFileVersion(SelectedFile, "Revision Version", currentVersion => currentVersion.RevisionVersion, (pg, versionNumber) => pg.RevisionVersion = versionNumber);
+        }
+
+        private void btnSyncBuildVersion_Click(object sender, RoutedEventArgs e)
+        {
+            SyncAllFileVersion(SelectedFile, "BuildNumber Version", currentVersion => currentVersion.BuildNumberVersion, (pg, versionNumber) => pg.BuildNumberVersion = versionNumber);
+        }
+        #endregion
+
+        #region Plus
 
         private void btnAllMajorVersionPlus_Click(object sender, RoutedEventArgs e)
         {
@@ -289,6 +333,9 @@ namespace Senparc.ProjectFileManager
 
             ProjectFiles.ToList().ForEach(pgFile => ChangeFileVersion(pgFile, pg => pg.QualifierVersion = qualifierVersion));
         }
+
+        #endregion
+
 
         #endregion
 
@@ -374,7 +421,7 @@ The following files are not saved:
 ";
                 foreach (var file in notSaved)
                 {
-                    msg += file + Environment.NewLine+ Environment.NewLine;
+                    msg += file + Environment.NewLine + Environment.NewLine;
                 }
             }
 
@@ -408,5 +455,7 @@ The following files are not saved:
             ProjectFiles.Remove(propertyGroup);
             e.Handled = true;
         }
+
+      
     }
 }
