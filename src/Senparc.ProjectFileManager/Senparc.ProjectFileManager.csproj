@@ -1,20 +1,24 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
-
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net7.0-windows</TargetFramework>
-    <UseWPF>true</UseWPF>
-    <Version>0.3.0</Version>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Costura.Fody" Version="4.1.0" />
-    <PackageReference Include="Fody" Version="6.1.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Senparc.CO2NET" Version="1.1.100-preview1" />
-    <PackageReference Include="WindowsAPICodePack-Shell" Version="1.1.1" />
-  </ItemGroup>
-
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <Version>0.3.1</Version>
+        <TargetFramework>net7.0-windows</TargetFramework>
+        <AssemblyName>Senparc.ProjectFileManager</AssemblyName>
+        <RootNamespace>Senparc.ProjectFileManager</RootNamespace>
+        <UseWPF>true</UseWPF>
+        <IsTestProject>false</IsTestProject>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <IsPackable>true</IsPackable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Company>Senparc</Company>
+        <Product>ProjectFileManager</Product>
+        <Description>Nuget package of 'ProjectFileManager' provided by Senparc</Description>
+        <PackageId>Senparc.ProjectFileManager</PackageId>
+        <PackageTags>nuget package dotnet csproj dependencies</PackageTags>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Costura.Fody" Version="5.7.0" />
+        <PackageReference Include="Senparc.CO2NET" Version="2.2.1" />
+        <PackageReference Include="WindowsAPICodePack-Shell" Version="1.1.1" />
+    </ItemGroup>
 </Project>
